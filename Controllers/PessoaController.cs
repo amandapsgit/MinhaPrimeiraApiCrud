@@ -16,11 +16,15 @@ namespace MinhaPrimeiraApiCrud.Controllers
             _context = context;
         }
 
+
         // GET: api/Pessoa
         [HttpGet]
         public async Task<IActionResult> Get()
         {
-            var pessoas = await _context.Pessoas.ToListAsync();
+            var pessoas = await _context.Pessoas
+         .Include(p => p.Enderecos)
+         .ToListAsync();
+
             return Ok(pessoas);
         }
 
